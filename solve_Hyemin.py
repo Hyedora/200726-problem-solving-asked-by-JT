@@ -7,6 +7,8 @@ def initialize():
 
 def main():
     set_size, max_gear_size = initialize()
+    num_pair=dict()
+    for g in range(1, max_gear_size+1):
+        num_pair[g]=
     
-
 main()
