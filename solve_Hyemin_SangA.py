@@ -1,6 +1,19 @@
 SET_SIZE = 6
 MAX_GEAR_NUM = 56
 
+def IsItRight(set1, set2):
+    valid = set()
+    for i in range(MAX_GEAR_NUM):
+        valid.add(i+1)
+    for x in set1:
+        for y in set2:
+            valid.discard(x*y)
+            valid.discard(x*y-1)
+            valid.discard(x*y+1)
+    if len(valid)==0:
+        return 1
+    return 0
+
 set1 = []
 set2 = []
 test=[]
@@ -28,5 +41,16 @@ for i in range(len(test)-2):
             set2_test.append([test[i], test[j], test[k]])
 
 for test1 in set1_test:
+    set1.extend(test1)
     for test2 in set2_test:
-        
+        set2.extend(test2)
+        if(IsItRight(set1, set2)):
+            print(set1)
+            print(set2)
+            raise(ValueError("FINISHED!!"))
+        for i in len(test2):
+            del set2
+    for i in len(test1):
+        del set1
+
+print("You are fool.")
