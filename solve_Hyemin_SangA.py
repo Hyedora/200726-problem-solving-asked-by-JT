@@ -11,42 +11,38 @@ def IsItRight(set1, set2):
             valid.discard(x*y-1)
             valid.discard(x*y+1)
     if len(valid)==0:
+        print("Yeah")
         return 1
+    print("힝", end="")
     return 0
 
-set1 = []
-set2 = []
-test1=[]
+set1 = [1, 3]
+set2 = [2, 3]
+test = [4,5,6,7,8,9,11,13,17,19]
 
-for i in input("set1의 고정요소: ").split(" "):
-    set1.append(int(i))
-for i in input("set2의 고정요소: ").split(" "):
-    set2.append(int(i))
-for i in input("test요소: ").split(" "):
-    test1.append(int(i))
-test2=test1.copy()
-
-for i in test1:
+"""for i in test1:
     if i in set1:
         test1.pop(test1.index(i))
 for i in test2:
     if i in set2:
-        test2.pop(test2.index(i))
+        test2.pop(test2.index(i))"""
 
 set1_test_len = SET_SIZE - len(set1)
 set2_test_len = SET_SIZE - len(set2)
 set1_test=[]
 set2_test=[]
-for i in range(len(test1)-3):
+for i in range(len(test)-3):
+    for j in range(i+1, len(test)-2):
+        for k in range(j+1, len(test)-1):
+            for l in range(k+1, len(test)):
+                set1_test.append([test[i], test[j], test[k], test[l]])
+                set2_test.append([test[i], test[j], test[k], test[l]])
+
+"""for i in range(len(test1)-3):
     for j in range(i+1, len(test1)-2):
         for k in range(j+1, len(test1)-1):
             for l in range(k+1, len(test1)):
-                set1_test.append([test1[i], test1[j], test1[k], test1[l]])
-
-for i in range(len(test2)-2):
-    for j in range(i+1, len(test2)-1):
-        for k in range(j+1, len(test2)):
-            set2_test.append([test2[i], test2[j], test2[k]])
+                set1_test.append([test1[i], test1[j], test1[k], test1[l]])"""
 
 for test1 in set1_test:
     set1.extend(test1)
@@ -61,4 +57,6 @@ for test1 in set1_test:
     for i in range(len(test1)):
         set1.pop()
 
-print("You are fool.")
+print("구")
+print(set1)
+print(set2)
