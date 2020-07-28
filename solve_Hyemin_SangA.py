@@ -13,12 +13,11 @@ def IsItRight(set1, set2):
     if len(valid)==0:
         print("Yeah")
         return 1
-    print("힝", end="")
     return 0
 
-set1 = [1, 3]
-set2 = [2, 3]
-test = [4,5,6,7,8,9,11,13,17,19]
+set1 = [1]
+set2 = []
+test = [2,3,4,5,6,7,8,9,10,11,12,13,17,19,23,29]
 
 """for i in test1:
     if i in set1:
@@ -31,12 +30,20 @@ set1_test_len = SET_SIZE - len(set1)
 set2_test_len = SET_SIZE - len(set2)
 set1_test=[]
 set2_test=[]
-for i in range(len(test)-3):
-    for j in range(i+1, len(test)-2):
-        for k in range(j+1, len(test)-1):
-            for l in range(k+1, len(test)):
-                set1_test.append([test[i], test[j], test[k], test[l]])
-                set2_test.append([test[i], test[j], test[k], test[l]])
+for e in range(len(test)-4):
+    for i in range(e+1, len(test)-3):
+        for j in range(i+1, len(test)-2):
+            for k in range(j+1, len(test)-1):
+                for l in range(k+1, len(test)):
+                    set1_test.append([test[e], test[i], test[j], test[k], test[l]])
+
+for a in range(len(test)-5):
+    for e in range(a+1, len(test)-4):
+        for i in range(e+1, len(test)-3):
+            for j in range(i+1, len(test)-2):
+                for k in range(j+1, len(test)-1):
+                    for l in range(k+1, len(test)):
+                        set2_test.append([test[a], test[e], test[i], test[j], test[k], test[l]])
 
 """for i in range(len(test1)-3):
     for j in range(i+1, len(test1)-2):
