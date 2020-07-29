@@ -46,8 +46,8 @@ for test1 in set1_test:
         if(IsItRight(set1, set2)):
             solution_num+=1
             print("SOLUTION"+str(solution_num)+": ", end="")
-            print(set1, end=", ")
-            print(set2)
+            print(sorted(set1), end=", ")
+            print(sorted(set2))
         for i in range(len(test2)):
             set2.pop()
     for i in range(len(test1)):
@@ -57,4 +57,3 @@ if solution_num==0:
     print("가능한 solution 조합이 없습니다.")
 else:
     print("%d개의 solution을 발견했습니다." %solution_num)
-print("FINISHED")
