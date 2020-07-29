@@ -1,6 +1,9 @@
+from itertools import combinations
+# set의 크기와 최대 기어값을 지정해준다
 SET_SIZE = 6
 MAX_GEAR_NUM = 56
 
+# set1과 set2가 문제 조건을 만족하는 set인지 확인한다
 def IsItRight(set1, set2):
     valid = set()
     for i in range(MAX_GEAR_NUM):
@@ -11,59 +14,47 @@ def IsItRight(set1, set2):
             valid.discard(x*y-1)
             valid.discard(x*y+1)
     if len(valid)==0:
-        print("Yeah")
         return 1
     return 0
 
-set1 = [1]
-set2 = []
-test = [2,3,4,5,6,7,8,9,10,11,12,13,17,19,23,29]
+# set1과 set2에 고정할 수들을 지정하고 검사해볼 test 수들을 입력한다
+set1 = [int(i) for i in input("set1에 고정할 수들을 입력하시오: ").split()]
+set2 = [int(i) for i in input("set2에 고정할 수들을 입력하시오: ").split()]
+test1 = [int(i) for i in input("검사해볼 수들을 입력하시오: ").split()]
+test2 = test1.copy()
 
-"""for i in test1:
+# test 수들 중에 이미 set에 들어있는 수가 존재한다면 제거한다
+for i in test1:
     if i in set1:
         test1.pop(test1.index(i))
 for i in test2:
     if i in set2:
-        test2.pop(test2.index(i))"""
+        test2.pop(test2.index(i))
 
-set1_test_len = SET_SIZE - len(set1)
-set2_test_len = SET_SIZE - len(set2)
-set1_test=[]
-set2_test=[]
-for e in range(len(test)-4):
-    for i in range(e+1, len(test)-3):
-        for j in range(i+1, len(test)-2):
-            for k in range(j+1, len(test)-1):
-                for l in range(k+1, len(test)):
-                    set1_test.append([test[e], test[i], test[j], test[k], test[l]])
+# 각 set에 들어갈 수 있는 test 수의 조합을 만들어낸다
+set1_test = list(combinations(test1, SET_SIZE-len(set1)))
+set2_test = list(combinations(test2, SET_SIZE-len(set2)))
 
-for a in range(len(test)-5):
-    for e in range(a+1, len(test)-4):
-        for i in range(e+1, len(test)-3):
-            for j in range(i+1, len(test)-2):
-                for k in range(j+1, len(test)-1):
-                    for l in range(k+1, len(test)):
-                        set2_test.append([test[a], test[e], test[i], test[j], test[k], test[l]])
-
-"""for i in range(len(test1)-3):
-    for j in range(i+1, len(test1)-2):
-        for k in range(j+1, len(test1)-1):
-            for l in range(k+1, len(test1)):
-                set1_test.append([test1[i], test1[j], test1[k], test1[l]])"""
-
+# 위에서 만든 수 조합들을 모두 대입해보면서 해답이 존재하는지 찾는다
+solution_num=0
+print()
 for test1 in set1_test:
     set1.extend(test1)
     for test2 in set2_test:
         set2.extend(test2)
+        # 문제 조건을 만족한다면 해당 set을 출력한다
         if(IsItRight(set1, set2)):
-            print(set1)
+            solution_num+=1
+            print("SOLUTION"+str(solution_num)+": ", end="")
+            print(set1, end=", ")
             print(set2)
-            raise ValueError("FINISHED!!")
         for i in range(len(test2)):
             set2.pop()
     for i in range(len(test1)):
         set1.pop()
 
-print("구")
-print(set1)
-print(set2)
+if solution_num==0:
+    print("가능한 solution 조합이 없습니다.")
+else:
+    print("%d개의 solution을 발견했습니다." %solution_num)
+print("FINISHED")
